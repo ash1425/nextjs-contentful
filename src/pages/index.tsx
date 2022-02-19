@@ -3,6 +3,7 @@ import { GetStaticProps } from "next";
 import { Intro } from "../model/Intro";
 import { createClient } from "contentful";
 import Link from "next/link";
+import Head from "next/head";
 
 const HPContainer = styled.div``;
 
@@ -27,6 +28,13 @@ export const getStaticProps: GetStaticProps<Props> = async (ctx) => {
 const HomePage = (props: Props) => {
   return (
     <HPContainer>
+      <Head>
+        <title>Intro to my family</title>
+        <meta
+          name="description"
+          content="This is an introduction to my family"
+        />
+      </Head>
       <h1>People</h1>
       <ul>
         {props.intros?.map((i) => (
