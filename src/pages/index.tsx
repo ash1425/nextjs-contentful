@@ -39,7 +39,7 @@ const HomePage = (props: Props) => {
       <ul>
         {props.intros?.map((i) => (
           <li key={i.id}>
-            <Link href={"/intro/" + i.id}>
+            <Link href={"/intro/" + i.id} prefetch={false}>
               <a>{i.title}</a>
             </Link>
           </li>

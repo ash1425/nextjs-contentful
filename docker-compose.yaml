@@ -1,0 +1,9 @@
+version: '2'
+services:
+  my-app:
+    image: 819711251294.dkr.ecr.us-east-1.amazonaws.com/my-app:latest
+    ports:
+      - "3000:3000"
+    environment:
+      - CF_SPACE_ID=hq4skgadvikw
+      - CF_CD_ACCESS_TOKEN=1QSduw8FI_0Yx9kq1LpsNIC--AktHY9R8AX1qZ1V_8s

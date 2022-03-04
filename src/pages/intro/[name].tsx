@@ -15,30 +15,21 @@ type Props = {
 
 export const getStaticProps: GetStaticProps = async (context) => {
   const { name } = context.params as { name: string };
+  console.log("building for ::: ", name);
+  await new Promise((resolve) => setTimeout(resolve, 2000));
+  console.log("==================");
   let client = createClient({
     space: process.env.CF_SPACE_ID!,
     accessToken: process.env.CF_CD_ACCESS_TOKEN!,
   });
   let entries = await client.getEntries<Intro>({ content_type: "intro" });
   let intro = entries.items.find((entry) => entry.fields.id === name)?.fields!;
-  return { props: { name, intro } };
+  return { props: { name, intro }, revalidate: 60 };
 };
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  let client = createClient({
-    space: process.env.CF_SPACE_ID!,
-    accessToken: process.env.CF_CD_ACCESS_TOKEN!,
-  });
-  const allIntros = await client.getEntries<Intro>({ content_type: "intro" });
-  let paths = allIntros.items.map((i) => {
-    return {
-      params: {
-        name: i.fields.id,
-      },
-    };
-  });
   return {
-    paths: [...paths],
+    paths: [{ params: { name: "ashay" } }],
     fallback: "blocking",
   };
 };
